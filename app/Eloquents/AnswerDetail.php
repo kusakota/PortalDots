@@ -3,12 +3,19 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class AnswerDetail extends Model
 {
+    use HasFactory;
     use LogsActivity;
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\AnswerDetailFactory::new();
+    }
 
     public function getActivitylogOptions(): LogOptions
     {

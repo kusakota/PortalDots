@@ -1,13 +1,22 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Eloquents\Place;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Place::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'type' => $faker->numberBetween(1, 3),
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Eloquents\Place>
+ */
+class PlaceFactory extends Factory
+{
+    protected $model = Place::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name,
+            'type' => $this->faker->numberBetween(1, 3),
+        ];
+    }
+}

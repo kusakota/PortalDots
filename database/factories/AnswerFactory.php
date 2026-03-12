@@ -1,19 +1,24 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Eloquents\Answer;
 use App\Eloquents\Form;
 use App\Eloquents\Circle;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Answer::class, function (Faker $faker) {
-    return [
-        'form_id' => function() {
-            return factory(Form::class)->create()->id;
-        },
-        'circle_id' => function() {
-            return factory(Circle::class)->create()->id;
-        },
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Eloquents\Answer>
+ */
+class AnswerFactory extends Factory
+{
+    protected $model = Answer::class;
+
+    public function definition(): array
+    {
+        return [
+            'form_id' => Form::factory(),
+            'circle_id' => Circle::factory(),
+        ];
+    }
+}

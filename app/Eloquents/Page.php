@@ -3,6 +3,7 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
 use App\Eloquents\Concerns\IsNewTrait;
 use Illuminate\Support\Facades\DB;
@@ -11,8 +12,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Page extends Model
 {
+    use HasFactory;
     use IsNewTrait;
     use LogsActivity;
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\PageFactory::new();
+    }
 
     protected $casts = [
         'is_pinned' => 'bool',
@@ -52,8 +59,8 @@ class Page extends Model
         static $result = null;
         if ($result === null) {
             // MySQL 5.7 以上の場合のみ対応
-            $results = DB::select(DB::raw("select version()"));
-            $mysql_version =  $results[0]->{'version()'};
+            $resultRow = DB::selectOne('select version() as version');
+            $mysql_version = $resultRow->version;
             if (strpos(strtolower($mysql_version), 'mariadb') !== false) {
                 // MariaDB を利用している場合
                 return false;

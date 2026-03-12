@@ -3,6 +3,7 @@
 namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property bool $is_sent
@@ -10,6 +11,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Email extends Model
 {
+    use HasFactory;
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\EmailFactory::new();
+    }
     /**
      * メール送信済であれば true を返す動的プロパティを作る
      *

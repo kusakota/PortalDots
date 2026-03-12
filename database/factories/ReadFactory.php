@@ -1,19 +1,24 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Eloquents\Page;
 use App\Eloquents\Read;
+use App\Eloquents\Page;
 use App\Eloquents\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Read::class, function (Faker $faker) {
-    return [
-        'page_id' => function () {
-            return factory(Page::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(User::class)->create()->id;
-        },
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Eloquents\Read>
+ */
+class ReadFactory extends Factory
+{
+    protected $model = Read::class;
+
+    public function definition(): array
+    {
+        return [
+            'page_id' => Page::factory(),
+            'user_id' => User::factory(),
+        ];
+    }
+}

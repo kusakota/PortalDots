@@ -1,19 +1,28 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Eloquents\Document;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Document::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'description' => $faker->text,
-        'path' => 'documents/foobar.pdf',
-        'size' => 1,
-        'extension' => 'pdf',
-        'is_public' => true,
-        'is_important' => false,
-        'notes' => $faker->text,
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Eloquents\Document>
+ */
+class DocumentFactory extends Factory
+{
+    protected $model = Document::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name,
+            'description' => $this->faker->text,
+            'path' => 'documents/foobar.pdf',
+            'size' => 1,
+            'extension' => 'pdf',
+            'is_public' => true,
+            'is_important' => false,
+            'notes' => $this->faker->text,
+        ];
+    }
+}

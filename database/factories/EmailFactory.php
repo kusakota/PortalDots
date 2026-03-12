@@ -1,18 +1,27 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Eloquents\Email;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Email::class, function (Faker $faker) {
-    return [
-        'subject' => $faker->text,
-        'body' => $faker->text,
-        'email_to' => $faker->email,
-        'email_to_name' => $faker->name,
-        'locked_at' => null,
-        'sent_at' => null,
-        'count_failed' => 0,
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Eloquents\Email>
+ */
+class EmailFactory extends Factory
+{
+    protected $model = Email::class;
+
+    public function definition(): array
+    {
+        return [
+            'subject' => $this->faker->text,
+            'body' => $this->faker->text,
+            'email_to' => $this->faker->email,
+            'email_to_name' => $this->faker->name,
+            'locked_at' => null,
+            'sent_at' => null,
+            'count_failed' => 0,
+        ];
+    }
+}

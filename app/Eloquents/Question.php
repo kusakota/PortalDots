@@ -5,6 +5,7 @@ namespace App\Eloquents;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -26,7 +27,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Question extends Model
 {
+    use HasFactory;
     use LogsActivity;
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\QuestionFactory::new();
+    }
 
     public const QUESTION_TYPES = [
         'heading',

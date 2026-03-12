@@ -1,13 +1,22 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Eloquents\Tag;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Tag::class, function (Faker $faker) {
-    return [
-        // 同じnameが2つ以上生成されないよう、乱数を追加する
-        'name' => $faker->name . strval(mt_rand(0, 10000)),
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Eloquents\Tag>
+ */
+class TagFactory extends Factory
+{
+    protected $model = Tag::class;
+
+    public function definition(): array
+    {
+        return [
+            // 同じnameが2つ以上生成されないよう、乱数を追加する
+            'name' => $this->faker->name . strval(mt_rand(0, 10000)),
+        ];
+    }
+}

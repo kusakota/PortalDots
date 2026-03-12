@@ -5,6 +5,7 @@ namespace App\Eloquents;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -24,7 +25,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Form extends Model
 {
+    use HasFactory;
     use LogsActivity;
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\FormFactory::new();
+    }
 
     protected $fillable = [
         'name',
@@ -37,11 +44,9 @@ class Form extends Model
         'is_public',
     ];
 
-    protected $dates = [
-        'open_at', 'close_at',
-    ];
-
     protected $casts = [
+        'open_at' => 'datetime',
+        'close_at' => 'datetime',
         'max_answers' => 'int',
         'is_public' => 'bool',
     ];

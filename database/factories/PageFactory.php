@@ -1,15 +1,24 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Eloquents\Page;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Page::class, function (Faker $faker) {
-    return [
-        'title' => $faker->name,
-        'body' => $faker->text,
-        'is_pinned' => false,
-        'is_public' => true,
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Eloquents\Page>
+ */
+class PageFactory extends Factory
+{
+    protected $model = Page::class;
+
+    public function definition(): array
+    {
+        return [
+            'title' => $this->faker->name,
+            'body' => $this->faker->text,
+            'is_pinned' => false,
+            'is_public' => true,
+        ];
+    }
+}
